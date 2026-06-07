@@ -1,0 +1,66 @@
+<div class="dashboard-wrapper">
+  
+  <!-- Barra Lateral (Sidebar) -->
+  <aside class="sidebar">
+    <div class="brand">
+      <h1 class="black-ops-one-regular">Gestão em Foco</h1>
+    </div>
+    
+    <nav class="menu">
+      <a routerLink="/dashboard" routerLinkActive="active" class="menu-item">
+        <span class="icon">📊</span> Painel Geral
+      </a>
+      <a routerLink="/usuarios" routerLinkActive="active" class="menu-item">
+        <span class="icon">👤</span> Usuários
+      </a>
+      <a routerLink="/configuracoes" routerLinkActive="active" class="menu-item">
+        <span class="icon">⚙️</span> Configurações
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        <span class="icon">🚪</span> Sair do Sistema
+      </button>
+    </div>
+  </aside>
+
+  <!-- Área de Conteúdo Direito -->
+  <div class="main-content">
+    
+    <!-- Cabeçalho Superior -->
+    <header class="top-header">
+      <div class="page-title">
+        <h2>Painel Geral</h2>
+      </div>
+      <div class="user-profile">
+        <span class="user-name">Olá, <strong>Administrador</strong></span>
+        <div class="avatar">A</div>
+      </div>
+    </header>
+
+    <!-- Conteúdo da Página -->
+    <main class="content-body">
+      <!-- Exemplo de Cards de Resumo -->
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Total de Acessos</h3>
+          <p class="card-value">125</p>
+        </div>
+        <div class="card">
+          <h3>Novos Alertas</h3>
+          <p class="card-value text-alert">3</p>
+        </div>
+        <div class="card">
+          <h3>Status do Sistema</h3>
+          <p class="card-value text-success">Online</p>
+        </div>
+          <div class="card">
+          <h3>Status do Serviço</h3>
+          <p class="card-value text-error">Offline</p>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>

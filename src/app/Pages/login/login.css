@@ -1,0 +1,219 @@
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f5f5f5; /* Um fundo cinza claro para destacar o card */
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: white;
+}
+
+h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+}
+
+/* Container dos campos com posição relativa */
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+/* Estilo do Input como uma linha minimalista */
+.form-group input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #333;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  background: transparent;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+/* Muda a cor da linha quando o usuário clica no campo */
+.form-group input:focus {
+  border-bottom-color: #007bff;
+}
+
+/* Posição inicial do Label (por cima da linha, onde o usuário digita) */
+.form-group label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 16px;
+  color: #999;
+  pointer-events: none; /* Garante que o clique passe direto para o input */
+  transition: all 0.2s ease; /* Cria o efeito de animação suave */
+}
+
+/* O TRUQUE: Se o campo ganhar foco (:focus) OU se o texto não for vazio, o label sobe */
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+  top: -12px;
+  font-size: 12px;
+  color: #007bff;
+}
+
+/* Espaço extra no final do input para o texto não sobrepor o ícone */
+.password-group input {
+  padding-right: 40px !important;
+}
+
+/* Botão do olho posicionado no final do campo, alinhado com a linha inferior */
+.toggle-password {
+  position: absolute;
+  right: 4px;
+  bottom: 8px; /* Ajustado para alinhar perfeitamente acima da linha inferior */
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Tamanho e cor cinza profissional dos ícones */
+.icon-svg {
+  width: 20px;
+  height: 20px;
+  color: #9ca3af; /* Cinza sutil e moderno */
+  transition: color 0.2s ease;
+}
+
+/* Mudança sutil para feedback visual ao passar o mouse */
+.toggle-password:hover .icon-svg {
+  color: #6b7280; /* Cinza ligeiramente mais escuro */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: -10px; /* Puxa para mais perto do campo de senha */
+  margin-bottom: 20px; /* Afasta do botão entrar */
+}
+
+.forgot-password a {
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-password a:hover {
+  color: #000; /* Ou a cor primária do seu sistema */
+  text-decoration: underline;
+}
+
+/* Remove o olho nativo que alguns navegadores (como Edge e Safari) tentam colocar */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+/* --- REGRAS DO MODAL COM SOBREPOSIÇÃO DE ESCOPO --- */
+
+/* Fundo escurecido que cobre toda a tela */
+:host ::ng-deep .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5) !important; /* Sombra escura suave */
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000 !important; /* Força ficar acima de qualquer elemento */
+  backdrop-filter: blur(2px); /* Efeito opcional de desfoque de fundo */
+}
+
+/* Card centralizado do modal */
+:host ::ng-deep .modal-card {
+  background-color: white !important;
+  padding: 30px !important;
+  border-radius: 8px !important;
+  width: 90% !important;
+  max-width: 400px !important;
+  text-align: center !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  animation: modalEntrada 0.3s ease-out; /* Animação suave ao abrir */
+}
+
+:host ::ng-deep .modal-icon {
+  font-size: 40px !important;
+  margin-bottom: 15px !important;
+  display: block !important;
+}
+
+:host ::ng-deep .modal-card h3 {
+  margin: 0 0 10px 0 !important;
+  color: #333 !important;
+  font-size: 20px !important;
+}
+
+:host ::ng-deep .modal-card p {
+  color: #666 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 25px !important;
+}
+
+/* Botão específico do modal */
+:host ::ng-deep .modal-btn {
+  background-color: #333 !important; /* Cor neutra escura para aviso */
+  color: white !important;
+  border: none !important;
+  padding: 12px 25px !important;
+  font-size: 15px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: background-color 0.2s;
+}
+
+:host ::ng-deep .modal-btn:hover {
+  background-color: #000 !important;
+}
+
+/* Animação para o modal surgir de forma elegante */
+@keyframes modalEntrada {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
