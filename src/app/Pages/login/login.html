@@ -38,21 +38,30 @@
         <a routerLink="/recuperar-senha">Esqueci minha senha</a>
       </div>
       
-      <button type="submit" (click)="fazerLogin($event)">Entrar</button>
+      <!-- ... final do seu formulário -->
+      <button type="submit" (click)="fazerLogin($event)" [disabled]="carregando">
+        @if (!carregando) {
+          <span>Entrar</span>
+        } @else {
+          <span class="spinner-container">
+            <span class="spinner-roda"></span>
+            Aguarde...
+          </span>
+        }
+      </button>
 
     </form>
   </div>
-</div>
+</div> <!-- 🌟 AQUI FECHA A DIV .page-wrapper -->
 
+<!-- O MODAL PRECISA FICAR COMPLETAMENTE FORA E ISOLADO NO FINAL DO ARQUIVO -->
 @if (exibirModalErro) {
-<!-- Modal de Informação (Utilizando propriedade hidden para garantir compatibilidade) -->
-<div class="modal-overlay" [hidden]="!exibirModalErro">
-  <div class="modal-card">
-    <div class="modal-icon">⚠️</div>
-    <h3>Falha na Autenticação</h3>
-    <p>O e-mail ou a senha digitada estão incorretos. Por favor, verifique as informações e tente novamente.</p>
-    <button type="button" class="modal-btn" (click)="exibirModalErro = false">Tentar Novamente</button>
+  <div class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon">⚠️</div>
+      <h3>Falha na Autenticação</h3>
+      <p>O e-mail ou a senha digitada estão incorretos. Por favor, verifique as informações e tente novamente.</p>
+      <button type="button" class="modal-btn" (click)="exibirModalErro = false">Tentar Novamente</button>
+    </div>
   </div>
-</div>
-
 }

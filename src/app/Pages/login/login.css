@@ -1,65 +1,98 @@
+/* ==========================================================================
+   ESTRUTURA DE LAYOUT E CONTAINER PRINCIPAL (ESTILO BASE - CELULAR)
+   ========================================================================== */
+
+/**
+ * Envoltório principal da página.
+ * Centraliza o card de login vertical e horizontalmente ocupando toda a tela.
+ */
 .page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100vh; /* Ocupa 100% da altura da janela do navegador */
   width: 100%;
   box-sizing: border-box;
-  background-color: #f5f5f5; /* Um fundo cinza claro para destacar o card */
+  background-color: #ffffff; /* Fundo totalmente branco no mobile para visual limpo (App-like) */
+  padding: 20px; /* Evita que o card cole nas bordas físicas da tela do celular */
 }
 
+/**
+ * Card central que contém o formulário de login.
+ * Otimizado para se comportar como uma página nativa de app em telas pequenas.
+ */
 .login-container {
   width: 100%;
-  max-width: 400px;
-  padding: 40px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 100%; /* Ocupa a largura total disponível do wrapper no mobile */
+  padding: 20px 10px; /* Espaçamento interno reduzido para priorizar espaço de tela */
+  border-radius: 0px; /* Sem bordas arredondadas em telas muito pequenas */
+  box-shadow: none; /* Sem sombras no celular para otimizar renderização */
   background-color: white;
 }
 
+/** Título principal do formulário. */
 h2 {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   text-align: center;
   color: #333;
+  font-size: 24px; /* Tamanho confortável para leitura em telas portáteis */
 }
 
-/* Container dos campos com posição relativa */
+
+/* ==========================================================================
+   FORMULÁRIO, INPUTS MINIMALISTAS E ANIMAÇÃO DE LABEL (FLOATING LABEL)
+   ========================================================================== */
+
+/** 
+ * Bloco de agrupamento para cada campo do formulário.
+ * Define posição relativa para ancorar o label absoluto e os ícones.
+ */
 .form-group {
   position: relative;
   margin-bottom: 25px;
 }
 
-/* Estilo do Input como uma linha minimalista */
+/**
+ * Estilização dos campos de texto (Inputs).
+ * Transforma o input padrão em uma linha minimalista inferior.
+ */
 .form-group input {
   width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
+  padding: 12px 0; /* Aumentado ligeiramente para facilitar o toque (touch-friendly) */
+  font-size: 16px; /* Evita que o iOS dê zoom automático ao focar no campo */
   color: #333;
   border: none;
-  border-bottom: 2px solid #ddd;
-  outline: none;
+  border-bottom: 2px solid #ddd; /* Linha inferior padrão cinza */
+  outline: none; /* Remove a borda padrão do navegador ao focar */
   background: transparent;
   box-sizing: border-box;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease; /* Animação suave na troca de cor da linha */
 }
 
-/* Muda a cor da linha quando o usuário clica no campo */
+/** Altera a cor da linha inferior para a cor primária quando o input recebe foco. */
 .form-group input:focus {
   border-bottom-color: #007bff;
 }
 
-/* Posição inicial do Label (por cima da linha, onde o usuário digita) */
+/**
+ * Label flutuante (Posição Inicial).
+ * Posicionado exatamente sobre a linha, simulando um placeholder.
+ */
 .form-group label {
   position: absolute;
-  top: 10px;
+  top: 12px;
   left: 0;
   font-size: 16px;
   color: #999;
-  pointer-events: none; /* Garante que o clique passe direto para o input */
-  transition: all 0.2s ease; /* Cria o efeito de animação suave */
+  pointer-events: none; /* Permite que o clique do mouse passe através dele para o input */
+  transition: all 0.2s ease; /* Cria o efeito de deslocamento e redução de tamanho */
 }
 
-/* O TRUQUE: Se o campo ganhar foco (:focus) OU se o texto não for vazio, o label sobe */
+/**
+ * EFEITO FLOATING LABEL (O Truque).
+ * Quando o input está focado OU quando o placeholder NÃO está aparecendo (possui texto),
+ * o label é movido para cima e reduzido de tamanho.
+ */
 .form-group input:focus ~ label,
 .form-group input:not(:placeholder-shown) ~ label {
   top: -12px;
@@ -67,153 +100,245 @@ h2 {
   color: #007bff;
 }
 
-/* Espaço extra no final do input para o texto não sobrepor o ícone */
+
+/* ==========================================================================
+   CONTROLE DE VISIBILIDADE DA SENHA (ÍCONE DE OLHO)
+   ========================================================================== */
+
+/** Garante um espaçamento extra à direita no input para o texto não sobrepor o ícone do olho. */
 .password-group input {
   padding-right: 40px !important;
 }
 
-/* Botão do olho posicionado no final do campo, alinhado com a linha inferior */
+/**
+ * Botão acionador para exibir/esconder a senha.
+ * Posicionado de forma absoluta no canto inferior direito do form-group.
+ */
 .toggle-password {
   position: absolute;
   right: 4px;
-  bottom: 8px; /* Ajustado para alinhar perfeitamente acima da linha inferior */
+  bottom: 10px; /* Alinhado de acordo com a nova altura de padding */
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 8px; /* Área de toque expandida para dispositivos mobile */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 5; /* Garante que fique clicável acima do input */
 }
 
-/* Tamanho e cor cinza profissional dos ícones */
+/** Estilização base do ícone SVG. */
 .icon-svg {
   width: 20px;
   height: 20px;
-  color: #9ca3af; /* Cinza sutil e moderno */
+  color: #9ca3af; /* Cinza moderno e sutil */
   transition: color 0.2s ease;
 }
 
-/* Mudança sutil para feedback visual ao passar o mouse */
+/** Feedback visual: escurece ligeiramente o ícone ao passar o mouse. */
 .toggle-password:hover .icon-svg {
-  color: #6b7280; /* Cinza ligeiramente mais escuro */
+  color: #6b7280;
 }
 
+
+/* ==========================================================================
+   BOTÕES DE AÇÃO E LINKS
+   ========================================================================== */
+
+/** Botão de submissão do formulário (Entrar). */
 button[type="submit"] {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 14px; /* Botão mais alto no celular para facilitar o clique com o polegar */
+  margin-top: 15px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px; /* Bordas um pouco mais suaves para o mobile */
   font-size: 16px;
+  font-weight: 600; /* Destaque na ação primária */
   cursor: pointer;
   transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent; /* Remove o flash azul nativo ao tocar no celular */
 }
 
+/** Feedback visual de hover do botão principal. */
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-.forgot-password {
-  text-align: right;
-  margin-top: -10px; /* Puxa para mais perto do campo de senha */
-  margin-bottom: 20px; /* Afasta do botão entrar */
+/** Estado desativado do botão durante o carregamento */
+button[type="submit"]:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+  opacity: 0.8;
 }
 
+/** Alinhamento do bloco do link "Esqueci minha senha". */
+.forgot-password {
+  text-align: right;
+  margin-top: -5px; 
+  margin-bottom: 25px; 
+}
+
+/** Estilo padrão do link de recuperação de senha. */
 .forgot-password a {
-  color: #666;
+  color: #9ca3af;
   font-size: 14px;
   text-decoration: none;
   transition: color 0.2s;
+  padding: 5px 0; /* Aumenta a área de clique vertical do link */
+  display: inline-block;
 }
 
+/** Efeito de hover para o link de recuperação. */
 .forgot-password a:hover {
-  color: #000; /* Ou a cor primária do seu sistema */
+  color: #007bff;
   text-decoration: underline;
 }
 
-/* Remove o olho nativo que alguns navegadores (como Edge e Safari) tentam colocar */
+/** Remove o botão nativo de revelar senha padrão do Edge, Chrome e Safari modernos. */
 input::-ms-reveal,
 input::-ms-clear {
   display: none;
 }
 
-/* --- REGRAS DO MODAL COM SOBREPOSIÇÃO DE ESCOPO --- */
 
-/* Fundo escurecido que cobre toda a tela */
-:host ::ng-deep .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5) !important; /* Sombra escura suave */
-  display: flex !important;
-  justify-content: center;
+/* ==========================================================================
+   EFEITO DE CARREGAMENTO (SPINNER NO BOTÃO)
+   ========================================================================== */
+
+/** Container que alinha o círculo e o texto dentro do botão */
+.spinner-container {
+  display: flex;
   align-items: center;
-  z-index: 10000 !important; /* Força ficar acima de qualquer elemento */
-  backdrop-filter: blur(2px); /* Efeito opcional de desfoque de fundo */
+  justify-content: center;
+  gap: 10px;
 }
 
-/* Card centralizado do modal */
-:host ::ng-deep .modal-card {
-  background-color: white !important;
-  padding: 30px !important;
+/** O círculo do Spinner propriamente dito */
+.spinner-roda {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: girarSpinner 0.8s linear infinite;
+}
+
+
+/* ==========================================================================
+   MODAL DE ERRO BLINDADO (REESTRUTURADO)
+   ========================================================================== */
+
+/**
+ * Película escura (Overlay) do modal.
+ */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.6) !important; /* Escurece o fundo de forma nítida */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 999999 !important; /* Força ficar à frente do wrapper do mobile */
+  backdrop-filter: blur(3px) !important;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/** Caixa centralizada (Card) que exibe a mensagem do modal. */
+.modal-card {
+  background-color: #ffffff !important;
+  padding: 30px 20px !important;
   border-radius: 8px !important;
-  width: 90% !important;
-  max-width: 400px !important;
+  width: 100% !important;
+  max-width: 350px !important;
   text-align: center !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
-  animation: modalEntrada 0.3s ease-out; /* Animação suave ao abrir */
-}
-
-:host ::ng-deep .modal-icon {
-  font-size: 40px !important;
-  margin-bottom: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  animation: modalEntrada 0.25s ease-out !important;
   display: block !important;
 }
 
-:host ::ng-deep .modal-card h3 {
+/** Ícone de alerta dentro do modal. */
+.modal-icon {
+  font-size: 38px !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+
+/** Título do modal. */
+.modal-card h3 {
   margin: 0 0 10px 0 !important;
-  color: #333 !important;
+  color: #333333 !important;
   font-size: 20px !important;
 }
 
-:host ::ng-deep .modal-card p {
-  color: #666 !important;
-  font-size: 15px !important;
+/** Corpo de texto do modal. */
+.modal-card p {
+  color: #555555 !important;
+  font-size: 14px !important;
   line-height: 1.5 !important;
   margin-bottom: 25px !important;
 }
 
-/* Botão específico do modal */
-:host ::ng-deep .modal-btn {
-  background-color: #333 !important; /* Cor neutra escura para aviso */
+/** Botão específico do modal. */
+.modal-btn {
+  background-color: #dc3545 !important; /* Vermelho padrão de erro profissional */
   color: white !important;
   border: none !important;
   padding: 12px 25px !important;
   font-size: 15px !important;
-  border-radius: 4px !important;
+  border-radius: 6px !important;
   cursor: pointer !important;
   width: 100% !important;
+  font-weight: 600 !important;
   transition: background-color 0.2s;
 }
 
-:host ::ng-deep .modal-btn:hover {
-  background-color: #000 !important;
+.modal-btn:hover {
+  background-color: #c82333 !important;
 }
 
-/* Animação para o modal surgir de forma elegante */
+
+/* ==========================================================================
+   ANIMAÇÕES (KEYFRAMES)
+   ========================================================================== */
+
 @keyframes modalEntrada {
   from {
-    transform: scale(0.8);
+    transform: scale(0.85);
     opacity: 0;
   }
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes girarSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (ADAPTAÇÃO PARA TABLETS E DESKTOPS)
+   ========================================================================== */
+
+@media (min-width: 576px) {
+  .page-wrapper {
+    background-color: #f5f5f5; /* Devolve o fundo cinza de contraste */
+  }
+
+  .login-container {
+    max-width: 400px; /* Define o tamanho máximo fixo do card de login */
+    padding: 40px 30px; /* Restaura o espaçamento generoso interno */
+    border-radius: 8px; /* Arredondamento sutil nos cantos */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Devolve a sombra de elevação */
   }
 }

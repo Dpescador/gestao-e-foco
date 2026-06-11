@@ -3,7 +3,7 @@
   <!-- Barra Lateral (Sidebar) -->
   <aside class="sidebar">
     <div class="brand">
-      <h1 class="black-ops-one-regular">Gestão em Foco</h1>
+      <h1 class="black-ops-one-regular">Home</h1>
     </div>
     
     <nav class="menu">
@@ -33,9 +33,21 @@
       <div class="page-title">
         <h2>Painel Geral</h2>
       </div>
+      
+      <!-- Bloco Corrigido: Agora puxa o nome da sessão dinamicamente -->
       <div class="user-profile">
-        <span class="user-name">Olá, <strong>Administrador</strong></span>
-        <div class="avatar">A</div>
+        <span class="user-name">
+          @if (nomeUsuario) {
+            Olá, <strong>{{ nomeUsuario }}</strong>
+          } @else {
+            Olá, <strong>Usuário</strong>
+          }
+        </span>
+        
+        <!-- Avatar Dinâmico: Pega a primeira letra do nome ou 'U' se estiver vazio -->
+        <div class="avatar">
+          {{ nomeUsuario ? nomeUsuario.charAt(0).toUpperCase() : 'U' }}
+        </div>
       </div>
     </header>
 
@@ -55,12 +67,11 @@
           <h3>Status do Sistema</h3>
           <p class="card-value text-success">Online</p>
         </div>
-          <div class="card">
+        <div class="card">
           <h3>Status do Serviço</h3>
           <p class="card-value text-error">Offline</p>
         </div>
       </div>
     </main>
-
   </div>
 </div>
