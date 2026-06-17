@@ -1,11 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth'; // Certifique-se de que o caminho do import está correto
+import { AuthService } from '../../services/auth';
+import { Navbar } from "../../_components/navbar/navbar"; 
+import { Footer } from '../../_components/footer/footer';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
-  styleUrls: ['./home.css']
+  styleUrls: ['./home.css'],
+  imports: [Navbar, Footer]
 })
 export class HomeComponent implements OnInit {
   // Injeta os serviços necessários de forma funcional (padrão Angular moderno)
